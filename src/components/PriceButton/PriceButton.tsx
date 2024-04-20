@@ -36,11 +36,11 @@ export default function PriceButton({ price }: { price: number }) {
   }
 
   useEffect(() => {
-    getData<ExchangeRateResponse>(
-      `https://v6.exchangerate-api.com/v6/${import.meta.env.VITE_EXCHANGE_API}/pair/${currency}/RUB`
-    ).then((data) => {
-      data && setUpdatedPrice(Math.floor(price / data.conversion_rate));
-    });
+    // getData<ExchangeRateResponse>(
+    //   `https://v6.exchangerate-api.com/v6/${import.meta.env.VITE_EXCHANGE_API}/pair/${currency}/RUB`
+    // ).then((data) => {
+    //   data && setUpdatedPrice(Math.floor(price / data.conversion_rate));
+    // });
   }, [currency]);
 
   if (!updatedPrice) {

@@ -7,7 +7,22 @@ export default function Stops() {
   const stopsOptions = ['Все', 'Без пересадок', '1 пересадка', '2 пересадки', '3 пересадки'];
 
   const handleOnChange = (position: number) => {
-    const updatedCheckedState = stops.map((item, index) => (index === position ? !item : item));
+    const updatedCheckedState = [...stops];
+
+    if (position === 0) {
+      // Uncheck all checkboxes except the first one
+      updatedCheckedState.fill(false, 1); // Starts filling from index 1
+      updatedCheckedState[0] = true;
+    } else {
+      // For any other checkbox:
+      // Toggle the clicked checkbox's state only
+      updatedCheckedState[position] = !updatedCheckedState[position];
+      // If clicked checkbox is now unchecked, uncheck the first one
+      if (updatedCheckedState[position] && updatedCheckedState[0]) {
+        updatedCheckedState[0] = false;
+      }
+    }
+
     setStops(updatedCheckedState);
   };
 
@@ -17,12 +32,7 @@ export default function Stops() {
         <div key={option} className={styles.outerContainer} onClick={() => handleOnChange(index)}>
           <div style={{ display: 'flex', gap: '5px' }}>
             <label className={styles.container}>
-              <input
-                type="checkbox"
-                checked={stops[index]}
-                disabled
-                // onChange={() => handleOnChange(index)}
-              />
+              <input type="checkbox" checked={stops[index]} disabled />
               <span className={styles.checkmark}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
