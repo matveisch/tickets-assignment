@@ -1,2 +1,41 @@
 .ticketContainer {
+  transition:
+    box-shadow 0.2s linear,
+    background-color 0.2s;
+  background-color: $white-color;
+  border-radius: $border-radius;
+  cursor: pointer;
+  box-shadow: 0 0 0 2px $box-shadow-color;
+
+  display: flex;
+  min-height: 160px;
+  min-width: 729px;
+
+  &:hover {
+    box-shadow: 0 8px 16px $box-shadow-color;
+    transition:
+      box-shadow 0.1s linear,
+      background-color 0.1s;
+  }
+
+  .leftContainer {
+    padding: 20px;
+    border-right: 1px solid rgba(67, 83, 106, 0.08);
+    width: 207px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .rightContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 100%;
+  }
 }

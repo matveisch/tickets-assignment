@@ -1,0 +1,43 @@
+.currencySelector {
+  display: flex;
+  border-radius: $border-radius;
+
+  .currencyOption {
+    flex: 1;
+    transition-duration: 0.3s;
+    transition-property: color, background-color;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: $blue-font;
+    border: 2px solid $box-shadow-color;
+
+    &:first-child {
+      border-top-left-radius: inherit;
+      border-bottom-left-radius: inherit;
+    }
+
+    &:nth-child(2) {
+      border-left-color: transparent;
+      border-right-color: transparent;
+    }
+
+    &:last-child {
+      border-top-right-radius: inherit;
+      border-bottom-right-radius: inherit;
+    }
+
+    &:hover {
+      background-color: $blue-background;
+      border: 2px solid $blue-font;
+    }
+  }
+
+  .activeOption {
+    background-color: $blue-font;
+    color: $white-color;
+
+    &:hover {
+      background-color: $blue-font;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.App {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+
+  .ticketsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
