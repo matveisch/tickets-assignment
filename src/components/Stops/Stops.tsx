@@ -1,5 +1,5 @@
 import styles from './Stops.module.scss';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { StopsContext, StopsContextType } from '../../helpers/StopsContext.ts';
 
 function ensureOneChecked(arr: boolean[]) {
@@ -10,9 +10,10 @@ function ensureOneChecked(arr: boolean[]) {
 
 export default function Stops() {
   const { stops, setStops } = useContext(StopsContext) as StopsContextType;
+  const [updatedStops, setUpdatedStops] = useState<boolean[] | undefined>(undefined);
   const stopsOptions = ['Все', 'Без пересадок', '1 пересадка', '2 пересадки', '3 пересадки'];
 
-  const handleOnChange = (position: number) => {
+  function handleOnChange(position: number) {
     const updatedCheckedState = [...stops];
 
     if (position === 0) {
@@ -32,14 +33,21 @@ export default function Stops() {
     ensureOneChecked(updatedCheckedState);
 
     setStops(updatedCheckedState);
-  };
+  }
 
-  function setOneOption(index: number) {
+  function handleOnlyClick(index: number) {
+    console.log('clicked');
+
     const updatedCheckedState = [...stops];
     updatedCheckedState.fill(false);
     updatedCheckedState[index] = true;
-    setStops(updatedCheckedState);
+    console.log(updatedCheckedState);
+    setUpdatedStops(updatedCheckedState);
   }
+
+  useEffect(() => {
+    updatedStops && setStops(updatedStops);
+  }, [updatedStops]);
 
   return (
     <div className={styles.stops}>
@@ -65,7 +73,7 @@ export default function Stops() {
             </label>
             <div>{option}</div>
           </div>
-          <button className={styles.only} onClick={() => setOneOption(index)}>
+          <button className={styles.only} onClick={() => handleOnlyClick(index)}>
             только
           </button>
         </div>
