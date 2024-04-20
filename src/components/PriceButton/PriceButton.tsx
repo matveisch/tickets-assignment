@@ -2,6 +2,7 @@ import styles from './PriceButton.module.scss';
 import { useContext, useEffect, useState } from 'react';
 import { CurrencyContext, CurrencyContextType } from '../../helpers/CurrencyContext.ts';
 import { getData } from '../../App.tsx';
+import { ErrorMessageContext, ErrorMessageContextType } from '../../helpers/ErrorMessageContext.ts';
 
 interface ExchangeRateResponse {
   result: string;
@@ -18,6 +19,7 @@ interface ExchangeRateResponse {
 
 export default function PriceButton({ price }: { price: number }) {
   const { currency } = useContext(CurrencyContext) as CurrencyContextType;
+  const { setErrorMessage } = useContext(ErrorMessageContext) as ErrorMessageContextType;
   const [updatedPrice, setUpdatedPrice] = useState<number | undefined>(undefined);
 
   function getCurrencySymbol(activeCurrency: string) {
@@ -36,11 +38,13 @@ export default function PriceButton({ price }: { price: number }) {
   }
 
   useEffect(() => {
-    // getData<ExchangeRateResponse>(
-    //   `https://v6.exchangerate-api.com/v6/${import.meta.env.VITE_EXCHANGE_API}/pair/${currency}/RUB`
-    // ).then((data) => {
-    //   data && setUpdatedPrice(Math.floor(price / data.conversion_rate));
-    // });
+    getData<ExchangeRateResponse>(
+      // `https://v6.exchangerate-api.com/v6/${import.meta.env.VITE_EXCHANGE_API}/pair/${currency}/RUB`
+      '123'
+    ).then((data) => {
+      data && setUpdatedPrice(Math.floor(price / data.conversion_rate));
+      if (data) setErrorMessage('Цены недоступны – попробуйте снова');
+    });
   }, [currency]);
 
   if (!updatedPrice) {

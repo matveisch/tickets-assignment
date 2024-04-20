@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import Filter from './components/Filter/Filter.tsx';
 import { CurrencyContext } from './helpers/CurrencyContext.ts';
 import { StopsContext } from './helpers/StopsContext.ts';
+import ErrorMessage from './components/ErrorMessage/ErrorMessage.tsx';
+import { ErrorMessageContext } from './helpers/ErrorMessageContext.ts';
 
 export interface TicketType {
   origin: string;
@@ -35,10 +37,25 @@ function App() {
   const [filteredTickets, setFilteredTickets] = useState<TicketType[] | undefined>(tickets);
   const [currency, setCurrency] = useState<string>('RUB');
   const [stops, setStops] = useState<boolean[]>([true, false, false, false, false]);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const [animationOut, setAnimationOut] = useState(false);
 
   useEffect(() => {
     getData<TicketType[]>('Tickets.json').then((data) => setTickets(data));
   }, []);
+
+  useEffect(() => {
+    if (errorMessage) {
+      setTimeout(() => {
+        setAnimationOut(true);
+
+        setTimeout(() => {
+          setErrorMessage(undefined);
+          setAnimationOut(false);
+        }, 500);
+      }, 5000);
+    }
+  }, [errorMessage]);
 
   useEffect(() => {
     function filterFlightsByStops(flights: TicketType[], userStopSelection: boolean[]) {
@@ -62,19 +79,29 @@ function App() {
   return (
     <CurrencyContext.Provider value={{ currency, setCurrency }}>
       <StopsContext.Provider value={{ stops, setStops }}>
-        <div className={styles.App}>
-          <img className={styles.logo} src="/plane-logo.png" alt="plane-logo" />
-          <div className={styles.mainContainer}>
-            <Filter />
-            {filteredTickets && (
-              <div className={styles.ticketsContainer}>
-                {filteredTickets.map((ticket, index) => (
-                  <Ticket ticket={ticket} key={`ticket-${index}`} />
-                ))}
+        <ErrorMessageContext.Provider value={{ errorMessage, setErrorMessage }}>
+          <div className={styles.App}>
+            <img className={styles.logo} src="/plane-logo.png" alt="plane-logo" />
+            <div className={styles.mainContainer}>
+              <Filter />
+              {filteredTickets && (
+                <div className={styles.ticketsContainer}>
+                  {filteredTickets.map((ticket, index) => (
+                    <Ticket ticket={ticket} key={`ticket-${index}`} />
+                  ))}
+                </div>
+              )}
+            </div>
+            {errorMessage && (
+              <div
+                className={`${styles.errorWrapper} ${animationOut ? styles.out : styles.in}`}
+                style={animationOut ? { bottom: '10vh' } : undefined}
+              >
+                <ErrorMessage errorMessage={errorMessage} />
               </div>
             )}
           </div>
-        </div>
+        </ErrorMessageContext.Provider>
       </StopsContext.Provider>
     </CurrencyContext.Provider>
   );

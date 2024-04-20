@@ -1,0 +1,15 @@
+.errorContainer {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background-color: red;
+  border-radius: 50px;
+  width: fit-content;
+  padding: 5px 10px;
+
+  h2 {
+    text-align: center;
+    margin: 0;
+  }
+}
