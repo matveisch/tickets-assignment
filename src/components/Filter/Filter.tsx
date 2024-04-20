@@ -1,5 +1,6 @@
 import styles from './Filter.module.scss';
 import CurrencySelector from '../CurrencySelector/CurrencySelector.tsx';
+import Stops from '../Stops/Stops.tsx';
 
 export default function Filter() {
   return (
@@ -10,6 +11,7 @@ export default function Filter() {
       </div>
       <div className={styles.stops}>
         <span>количество пересадок</span>
+        <Stops />
       </div>
     </div>
   );
