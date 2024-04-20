@@ -1,6 +1,7 @@
 .button {
   cursor: pointer;
   color: white;
+  font-weight: 600;
   border-radius: $border-radius;
   height: 48px;
   padding: 0 16px;
@@ -15,11 +16,19 @@
   flex-direction: column;
   gap: 3px;
 
+  @media (max-width: 1024px) {
+    flex-direction: row;
+    margin-bottom: 20px;
+  }
   svg {
     position: absolute;
     -webkit-animation: spin 4s linear infinite;
     -moz-animation: spin 4s linear infinite;
     animation: spin 4s linear infinite;
+
+    @media (max-width: 1024px) {
+      filter: invert(0%) sepia(96%) saturate(7485%) hue-rotate(276deg) brightness(93%) contrast(99%);
+    }
 
     @-moz-keyframes spin {
       100% {

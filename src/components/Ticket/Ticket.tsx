@@ -42,6 +42,9 @@ export default function Ticket({ ticket }: TicketProps) {
         <img src={getAirlineLogo(carrier)} alt="airline-logo" />
         <PriceButton price={price} />
       </div>
+      <div className={styles.mobileLeftContainer}>
+        <PriceButton price={price} />
+      </div>
       <div className={styles.rightContainer}>
         <TimeTable departureTime={departure_time} arrivalTime={arrival_time} stops={stops} />
         <FlightData

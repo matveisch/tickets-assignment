@@ -11,6 +11,13 @@
   min-height: 160px;
   min-width: 729px;
 
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    min-width: unset;
+    width: calc(100% - 20px);
+    padding: 10px;
+  }
+
   &:hover {
     box-shadow: 0 8px 16px $box-shadow-color;
     transition:
@@ -30,6 +37,18 @@
     img {
       width: 100%;
     }
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+
+  .mobileLeftContainer {
+    display: flex;
+
+    @media (min-width: 1024px) {
+      display: none;
+    }
   }
 
   .rightContainer {
@@ -37,5 +56,9 @@
     flex-direction: column;
     padding: 20px;
     width: 100%;
+
+    @media (max-width: 1024px) {
+      padding: 0;
+    }
   }
 }
