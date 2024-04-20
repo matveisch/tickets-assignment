@@ -3,7 +3,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  background-color: red;
+  background-color: #ffbaba;
   border-radius: 50px;
   width: fit-content;
   padding: 5px 10px;
@@ -11,5 +11,6 @@
   h2 {
     text-align: center;
     margin: 0;
+    color: #d8000c;
   }
 }
