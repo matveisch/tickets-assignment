@@ -43,14 +43,17 @@ function App() {
     <CurrencyContext.Provider value={{ currency, setCurrency }}>
       <StopsContext.Provider value={{ stops, setStops }}>
         <div className={styles.App}>
-          <Filter />
-          {tickets && (
-            <div className={styles.ticketsContainer}>
-              {tickets.map((ticket, index) => (
-                <Ticket ticket={ticket} key={`ticket-${index}`} />
-              ))}
-            </div>
-          )}
+          <img className={styles.logo} src="/plane-logo.png" alt="plane-logo" />
+          <div className={styles.mainContainer}>
+            <Filter />
+            {tickets && (
+              <div className={styles.ticketsContainer}>
+                {tickets.map((ticket, index) => (
+                  <Ticket ticket={ticket} key={`ticket-${index}`} />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </StopsContext.Provider>
     </CurrencyContext.Provider>
