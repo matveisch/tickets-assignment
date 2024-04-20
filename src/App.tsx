@@ -33,7 +33,7 @@ export async function getData<T>(url: string): Promise<T | undefined> {
 function App() {
   const [tickets, setTickets] = useState<TicketType[] | undefined>();
   const [currency, setCurrency] = useState<string>('RUB');
-  const [stops, setStops] = useState<number | undefined>(undefined);
+  const [stops, setStops] = useState<boolean[]>([true, false, false, false, false]);
 
   useEffect(() => {
     getData<TicketType[]>('Tickets.json').then((data) => setTickets(data));

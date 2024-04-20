@@ -1,8 +1,8 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
 
 export interface StopsContextType {
-  stops: number | undefined;
-  setStops: Dispatch<SetStateAction<number | undefined>>;
+  stops: boolean[];
+  setStops: Dispatch<SetStateAction<boolean[]>>;
 }
 
 export const StopsContext = createContext<StopsContextType | null>(null);
