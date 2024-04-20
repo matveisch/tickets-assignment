@@ -2,6 +2,12 @@ import styles from './Stops.module.scss';
 import { useContext } from 'react';
 import { StopsContext, StopsContextType } from '../../helpers/StopsContext.ts';
 
+function ensureOneChecked(arr: boolean[]) {
+  if (!arr.some((element) => element)) {
+    arr[0] = true; // Set the first element to true (or any desired index)
+  }
+}
+
 export default function Stops() {
   const { stops, setStops } = useContext(StopsContext) as StopsContextType;
   const stopsOptions = ['Все', 'Без пересадок', '1 пересадка', '2 пересадки', '3 пересадки'];
@@ -23,8 +29,17 @@ export default function Stops() {
       }
     }
 
+    ensureOneChecked(updatedCheckedState);
+
     setStops(updatedCheckedState);
   };
+
+  function setOneOption(index: number) {
+    const updatedCheckedState = [...stops];
+    updatedCheckedState.fill(false);
+    updatedCheckedState[index] = true;
+    setStops(updatedCheckedState);
+  }
 
   return (
     <div className={styles.stops}>
@@ -50,7 +65,9 @@ export default function Stops() {
             </label>
             <div>{option}</div>
           </div>
-          <button className={styles.only}>только</button>
+          <button className={styles.only} onClick={() => setOneOption(index)}>
+            только
+          </button>
         </div>
       ))}
     </div>
