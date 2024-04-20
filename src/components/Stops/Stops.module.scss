@@ -1,16 +1,29 @@
 .stops {
+  padding-bottom: 15px;
+
   .outerContainer {
     display: flex;
     cursor: pointer;
-    padding: 0 15px;
-    gap: 5px;
+    padding: 5px 15px;
+    justify-content: space-between;
+
+    .only {
+      display: none;
+      color: $blue-font;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
 
     &:hover {
       background-color: $blue-background;
+
+      .only {
+        display: block;
+      }
     }
 
     .container input:checked ~ .checkmark {
-      //background: $blue-font;
       border-color: $blue-font;
       color: $white-color;
     }
