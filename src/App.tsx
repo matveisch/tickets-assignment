@@ -21,7 +21,7 @@ export interface TicketType {
   price: number;
 }
 
-async function getData<T>(url: string): Promise<T | undefined> {
+export async function getData<T>(url: string): Promise<T | undefined> {
   try {
     const response: AxiosResponse<T> = await axios.get(url);
     return response.data;
